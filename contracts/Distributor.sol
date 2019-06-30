@@ -92,8 +92,7 @@ contract Distributor is Timebased, Killable, Ownable, UseState, usingOraclize, W
 		emit LogDownloadsUpdated(repos, count);
 		uint dailyDownloads = daily(count, req.period);
 		uint nextTotalDownloads = totalDownloadsPerDay.sub(
-			lastDownloads[repos].add(dailyDownloads)
-		);
+			lastDownloads[repos]).add(dailyDownloads);
 		uint rate = dailyDownloads.div(nextTotalDownloads);
 		uint vol = req.period.mul(mintVolumePerDay);
 		uint value = vol.mul(rate);
